@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <link rel='stylesheet' href='sc.css'/>
+</head>
+<body>
+    <p></p>
+    <div class="container" id="app">
+        <div class="card">
+            <h1 :style='{color: inputValue.length < 4 ? "red" : "blue"}'>{{ title }}</h1>
+            <div class='form-control'>
+                <input 
+                type="text" 
+                v-bind:placeholder='placeholderString' 
+                v-bind:value='inputValue'
+                v-on:input='inputChangeHandler'
+                v-on:keypress.enter='addNewNote'
+                />
+            </div>
+            <button class='btn' v-on:click='addNewNote'>Добавить</button>
+            <hr/>
+            <ul class="list" v-if='notes.length != 0'>
+                <li class='list-item' v-for='(myNote, i) in notes'>
+                    {{ toUpperCase(myNote) }} {{i}}
+                    <button class="btn danger" v-on:click='delNote(i)'>Удалить</button>
+                </li>
+                <hr/>
+                <li>
+                    <p>Общее количество заметок: {{ notes.length }} | Удвоенное количество заметок: {{ doublecount }}</p>
+                </li>
+            </ul>
+            <div v-if='notes.length == 0'>Заметок пока нету</div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src='js.js'></script>
+</body>
+</html> 
